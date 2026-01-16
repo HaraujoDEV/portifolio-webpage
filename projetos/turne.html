@@ -1,0 +1,418 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="AURA Tour 2026 - Datas, Ingressos e Informações Exclusivas.">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.6.0/css/all.min.css">
+    <title>AURA Tour 2026 | Banda Ecos</title>
+    <style>
+        /* --- VARIÁVEIS & RESET --- */
+        :root {
+            --bg-color: #0a0a0a;
+            --card-bg: #141414;
+            --text-primary: #ffffff;
+            --text-secondary: #a0a0a0;
+            --accent: #bc13fe; /* Neon Purple */
+            --accent-hover: #d25aff;
+            --spacing-sm: 1rem;
+            --spacing-md: 2rem;
+            --spacing-lg: 4rem;
+            --font-main: 'Helvetica Neue', sans-serif;
+            --transition: all 0.3s ease;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-primary);
+            font-family: var(--font-main);
+            line-height: 1.6;
+        }
+
+        a { text-decoration: none; color: inherit; transition: var(--transition); }
+        ul { list-style: none; }
+        button { cursor: pointer; border: none; font-family: inherit; }
+
+        *:focus-visible {
+            outline: 2px solid var(--accent);
+            outline-offset: 4px;
+        }
+
+        /* --- HEADER & HERO --- */
+        header {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            padding: var(--spacing-sm);
+            z-index: 10;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo { font-weight: 700; font-size: 1.5rem; letter-spacing: 2px; text-shadow: 0 0 10px rgba(188, 19, 254, 0.5); }
+
+        .hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: var(--spacing-sm);
+            background: linear-gradient(rgba(0,0,0,0.4), var(--bg-color)), url('../assets/banda-bg.jpg') no-repeat center/cover;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 10vw, 8rem);
+            text-transform: uppercase;
+            line-height: 0.9;
+            background: linear-gradient(to right, #fff, #a0a0a0);
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: var(--spacing-sm);
+        }
+
+        .hero p { font-size: 1.2rem; color: var(--text-secondary); max-width: 600px; margin-bottom: 2rem; }
+
+        .cta-button {
+            padding: 1rem 2.5rem;
+            background: var(--accent);
+            color: #fff;
+            font-weight: bold;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            border-radius: 50px; /* Arredondado moderno */
+            box-shadow: 0 0 15px rgba(188, 19, 254, 0.4);
+        }
+
+        .cta-button:hover { 
+            background: var(--accent-hover); 
+            transform: translateY(-2px);
+            box-shadow: 0 0 25px rgba(188, 19, 254, 0.6);
+        }
+
+        /* --- SEÇÃO DE DATAS --- */
+        .tour-section {
+            padding: var(--spacing-lg) var(--spacing-sm);
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+
+        .section-title {
+            font-size: 2.5rem;
+            margin-bottom: var(--spacing-md);
+            text-transform: uppercase;
+            border-left: 5px solid var(--accent);
+            padding-left: 1rem;
+        }
+
+        .tour-list { display: grid; gap: 1rem; }
+
+        .tour-item {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1rem;
+            align-items: center;
+            border: 1px solid #333;
+            transition: var(--transition);
+            border-radius: 8px;
+        }
+
+        @media (min-width: 768px) {
+            .tour-item { grid-template-columns: 0.5fr 1.5fr 1fr auto; }
+        }
+
+        .tour-item:hover { border-color: var(--accent); transform: translateX(5px); }
+
+        .date-box {
+            display: flex;
+            flex-direction: column;
+            text-align: center;
+            background: #222;
+            padding: 0.5rem;
+            border-radius: 6px;
+        }
+        .date-day { font-size: 1.5rem; font-weight: bold; color: var(--accent); }
+        .date-month { font-size: 0.9rem; text-transform: uppercase; }
+
+        .status {
+            font-size: 0.8rem;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 0.25rem 0.5rem;
+            border-radius: 4px;
+            text-align: center;
+            width: fit-content;
+        }
+        .status.sold-out { background: #ff4444; color: white; }
+        .status.available { background: #00c851; color: black; }
+
+        .btn-details {
+            padding: 0.75rem 1.5rem;
+            border: 1px solid var(--text-primary);
+            background: transparent;
+            color: var(--text-primary);
+            border-radius: 4px;
+            transition: var(--transition);
+        }
+        .btn-details:hover { background: var(--text-primary); color: var(--bg-color); }
+
+        /* --- GALERIA --- */
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 0;
+            margin-top: var(--spacing-lg);
+        }
+        .gallery-item {
+            height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+        .gallery-item img {
+            width: 100%; height: 100%; object-fit: cover;
+            transition: transform 0.5s ease; filter: grayscale(100%);
+        }
+        .gallery-item:hover img { transform: scale(1.1); filter: grayscale(0%); }
+
+        /* --- NOVO: ÚLTIMO LANÇAMENTO --- */
+        .latest-release {
+            padding: var(--spacing-lg) var(--spacing-sm);
+            background: linear-gradient(180deg, var(--bg-color) 0%, #1a0524 100%);
+            border-top: 1px solid #333;
+            text-align: center;
+        }
+        
+        .release-container {
+            max-width: 900px;
+            margin: 0 auto;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 2rem;
+        }
+
+        @media (min-width: 768px) {
+            .release-container { flex-direction: row; text-align: left; }
+        }
+
+        .album-art {
+            width: 250px;
+            height: 250px;
+            border-radius: 10px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
+            transition: transform 0.3s ease;
+        }
+        
+        .album-art:hover { transform: scale(1.05) rotate(2deg); }
+
+        .release-info h2 { font-size: 2rem; margin-bottom: 0.5rem; }
+        .release-info h3 { color: var(--accent); font-size: 1.2rem; margin-bottom: 1.5rem; text-transform: uppercase; letter-spacing: 2px; }
+        
+        .btn-listen {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 1rem 2rem;
+            background: #1DB954; /* Spotify Green */
+            color: white;
+            border-radius: 50px;
+            font-weight: bold;
+        }
+        .btn-listen:hover { background: #1ed760; transform: scale(1.05); }
+
+        /* --- MODAL --- */
+        .modal-overlay {
+            position: fixed; top: 0; left: 0; width: 100%; height: 100%;
+            background: rgba(0,0,0,0.9); backdrop-filter: blur(5px);
+            display: flex; justify-content: center; align-items: center;
+            opacity: 0; pointer-events: none; transition: opacity 0.3s ease; z-index: 100;
+        }
+        .modal-overlay.active { opacity: 1; pointer-events: all; }
+        .modal-content {
+            background: #1a1a1a; padding: 2rem; width: 90%; max-width: 500px;
+            border-radius: 12px; border: 1px solid var(--accent);
+            transform: translateY(20px); transition: transform 0.3s ease;
+            position: relative;
+        }
+        .modal-overlay.active .modal-content { transform: translateY(0); }
+        .close-modal { position: absolute; top: 1rem; right: 1rem; font-size: 1.5rem; background: none; color: #fff; }
+        
+        .modal-actions { margin-top: 1.5rem; display: flex; gap: 1rem; flex-wrap: wrap; }
+        .btn-map { flex: 1; padding: 1rem; text-align: center; border: 1px solid #555; display: flex; align-items: center; justify-content: center; gap: 0.5rem; border-radius: 4px; color: #fff;}
+
+        /* --- NOVO: FOOTER --- */
+        footer {
+            padding: var(--spacing-lg) var(--spacing-sm);
+            background-color: #050505;
+            border-top: 1px solid #222;
+            text-align: center;
+        }
+
+        .social-links {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 2rem;
+        }
+
+        .social-icon {
+            font-size: 1.8rem;
+            color: var(--text-secondary);
+            transition: all 0.3s ease;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .social-icon span { font-size: 0.8rem; opacity: 0; transform: translateY(10px); transition: all 0.3s ease; }
+
+        .social-icon:hover { color: var(--accent); transform: translateY(-5px); text-shadow: 0 0 15px var(--accent); }
+        .social-icon:hover span { opacity: 1; transform: translateY(0); }
+
+        .footer-copy { font-size: 0.9rem; color: #555; }
+        .footer-copy a:hover { color: var(--accent); text-decoration: underline; }
+
+    </style>
+</head>
+<body>
+
+    <header>
+        <div class="logo">AURA</div>
+        <nav>
+            <a href="#datas" class="cta-button" style="padding: 0.5rem 1.5rem; font-size: 0.9rem;">INGRESSOS</a>
+        </nav>
+    </header>
+
+    <main>
+        <section class="hero" role="banner">
+            <h1>Aura Tour</h1>
+            <p>A experiência imersiva sonora e visual. Rodando o Brasil em 2026.</p>
+            <a href="#lancamento" style="border-bottom: 1px solid var(--accent);">Ouça o novo Single</a>
+        </section>
+
+        <section id="datas" class="tour-section" aria-labelledby="tour-heading">
+            <h2 id="tour-heading" class="section-title">Próximos Shows</h2>
+            <div class="tour-list" id="tour-list-container">
+                </div>
+        </section>
+
+        <section class="gallery" aria-label="Galeria da turnê">
+            <div class="gallery-item"><img src="../assets/neon.jpg" alt="Show Luzes"></div>
+            <div class="gallery-item"><img src="../assets/plateia.jpg" alt="Banda Palco"></div>
+            <div class="gallery-item"><img src="../assets/cantor.jpg" alt="Cantor"></div>
+        </section>
+
+        <section id="lancamento" class="latest-release">
+            <div class="release-container">
+                <img src="https://images.unsplash.com/photo-1614613535308-eb5fbd3d2c17?q=80&w=1000&auto=format&fit=crop" alt="Capa do Single Neon" class="album-art">
+                
+                <div class="release-info">
+                    <h2>NEON DREAMS</h2>
+                    <h3>Novo Single Já Disponível</h3>
+                    <p style="color: #ccc; margin-bottom: 2rem; max-width: 500px;">
+                        Uma jornada sintética através de melodias nostálgicas e batidas futuristas.
+                        Ouça agora em todas as plataformas digitais.
+                    </p>
+                    
+                    <a href="https://spotify.com" target="_blank" class="btn-listen">
+                        <i class="fab fa-spotify"></i> Ouvir no Spotify
+                    </a>
+                    <a href="https://music.apple.com" target="_blank" class="btn-details" style="margin-left: 10px; border-radius: 50px;">
+                        <i class="fab fa-apple"></i> Apple Music
+                    </a>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="social-links">
+            <a href="https://instagram.com" target="_blank" class="social-icon" aria-label="Instagram">
+                <i class="fab fa-instagram"></i>
+                <span>Instagram</span>
+            </a>
+            <a href="https://twitter.com" target="_blank" class="social-icon" aria-label="Twitter / X">
+                <i class="fab fa-x-twitter"></i>
+                <span>Twitter</span>
+            </a>
+            <a href="https://youtube.com" target="_blank" class="social-icon" aria-label="YouTube">
+                <i class="fab fa-youtube"></i>
+                <span>YouTube</span>
+            </a>
+            <a href="https://tiktok.com" target="_blank" class="social-icon" aria-label="TikTok">
+                <i class="fab fa-tiktok"></i>
+                <span>TikTok</span>
+            </a>
+        </div>
+        
+        <p class="footer-copy">
+            &copy; 2026 • Luiz Sales<br>
+            <span style="font-size: 0.8rem; color: #333;">Política de Privacidade • Termos de Uso</span>
+        </p>
+    </footer>
+
+    <div class="modal-overlay" id="tourModal" aria-hidden="true">
+        <div class="modal-content" role="dialog" aria-modal="true">
+            <button class="close-modal" id="closeModal">×</button>
+            <h2 id="modalTitle">Cidade</h2>
+            <p id="modalVenue" style="color: var(--accent); font-weight: bold; margin-bottom: 1rem;">Local</p>
+            <p id="modalDesc" style="color: #ccc; margin-bottom: 1.5rem;">Infos...</p>
+            <div class="modal-actions">
+                <a href="#" id="btnTicket" class="cta-button" style="flex: 2; text-align: center;">Comprar</a>
+                <a href="#" id="btnMap" target="_blank" class="btn-map">📍 Mapa</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // SCRIPT (Mesma lógica, mantida para funcionalidade)
+        const shows = [
+            { id: 1, day: "12", month: "OUT", city: "São Paulo, SP", venue: "Allianz Parque", status: "available", desc: "Abertura oficial da turnê.", mapLink: "https://maps.app.goo.gl/By5mbAN8oEoQnrk86", ticketLink: "#" },
+            { id: 2, day: "18", month: "OUT", city: "Rio de Janeiro, RJ", venue: "Engenhão", status: "sold-out", desc: "Show especial com gravação de DVD.", mapLink: "https://maps.app.goo.gl/4sG8YQjvyNdkmqu59", ticketLink: "#" },
+            { id: 3, day: "25", month: "OUT", city: "Curitiba, PR", venue: "Pedreira", status: "available", desc: "Show ao ar livre.", mapLink: "https://maps.app.goo.gl/1sifQTRv3e8wy6KU8", ticketLink: "#" },
+            { id: 4, day: "02", month: "NOV", city: "Belo Horizonte, MG", venue: "Mineirão", status: "available", desc: "Encerramento Brasil.", mapLink: "https://maps.app.goo.gl/HMk7UvyUiypBfeG27", ticketLink: "#" }
+        ];
+
+        const listContainer = document.getElementById('tour-list-container');
+        const modal = document.getElementById('tourModal');
+        const closeModalBtn = document.getElementById('closeModal');
+        const mTitle = document.getElementById('modalTitle');
+        const mVenue = document.getElementById('modalVenue');
+        const mDesc = document.getElementById('modalDesc');
+        const mTicket = document.getElementById('btnTicket');
+        const mMap = document.getElementById('btnMap');
+
+        shows.forEach(show => {
+            const item = document.createElement('div');
+            item.className = 'tour-item';
+            item.innerHTML = `
+                <div class="date-box"><span class="date-day">${show.day}</span><span class="date-month">${show.month}</span></div>
+                <div class="city-venue"><h3>${show.city}</h3><p>${show.venue}</p></div>
+                <div class="status ${show.status}">${show.status === 'sold-out' ? 'Esgotado' : 'Disponível'}</div>
+                <button class="btn-details" onclick="openModal(${show.id})">+ Detalhes</button>
+            `;
+            listContainer.appendChild(item);
+        });
+
+        function openModal(id) {
+            const show = shows.find(s => s.id === id);
+            if(!show) return;
+            mTitle.innerText = `${show.city}`; mVenue.innerText = show.venue; mDesc.innerText = show.desc; mMap.href = show.mapLink;
+            if(show.status === 'sold-out') { mTicket.innerText = "Esgotado"; mTicket.style.background = "#555"; mTicket.style.pointerEvents = "none"; }
+            else { mTicket.innerText = "Comprar Ingresso"; mTicket.style.background = "var(--accent)"; mTicket.style.pointerEvents = "all"; mTicket.href = show.ticketLink; }
+            modal.classList.add('active'); modal.setAttribute('aria-hidden', 'false');
+        }
+
+        function closeModal() { modal.classList.remove('active'); modal.setAttribute('aria-hidden', 'true'); }
+        closeModalBtn.addEventListener('click', closeModal);
+        window.onclick = (e) => { if (e.target == modal) closeModal() };
+    </script>
+</body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Lançamento Musical | Landing Page</title>
+
+  <!-- SEO básico -->
+  <meta name="description" content="Landing page para lançamento musical com foco em conversão, acessibilidade e experiência do usuário." />
+
+  <!-- Fonte moderna -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet" />
+
+  <style>
+    :root {
+      --bg-dark: #0f0f14;
+      --bg-light: #1b1b24;
+      --primary: #8b5cf6;
+      --secondary: #ec4899;
+      --text: #e5e7eb;
+      --text-muted: #9ca3af;
+      --radius: 14px;
+      --transition: 0.3s ease;
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: "Inter", system-ui, sans-serif;
+      background: linear-gradient(180deg, var(--bg-dark), var(--bg-light));
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    /* ===== ACESSIBILIDADE ===== */
+    :focus-visible {
+      outline: 3px solid var(--secondary);
+      outline-offset: 4px;
+    }
+
+    /* ===== LAYOUT ===== */
+    header {
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      padding: 2rem;
+      text-align: center;
+      background:
+        linear-gradient(180deg, rgba(0,0,0,0.6), rgba(0,0,0,0.9)),
+        url("../assets/hero-lancamento.jpg");
+      /* ↑ INSIRA AQUI:
+         imagem de capa do artista, teaser do clipe ou arte do single */
+      background-size: cover;
+      background-position: center;
+    }
+
+    header h1 {
+      font-size: clamp(2.2rem, 5vw, 3.5rem);
+      margin-bottom: 1rem;
+    }
+
+    header p {
+      max-width: 620px;
+      margin: 0 auto 2rem;
+      color: var(--text-muted);
+      font-size: 1.1rem;
+    }
+
+    .cta-group {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .btn {
+      padding: 0.9rem 1.6rem;
+      border-radius: var(--radius);
+      border: none;
+      cursor: pointer;
+      font-weight: 600;
+      text-decoration: none;
+      transition: transform var(--transition), box-shadow var(--transition);
+    }
+
+    .btn-primary {
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      color: #fff;
+    }
+
+    .btn-secondary {
+      background: transparent;
+      border: 1px solid var(--primary);
+      color: var(--primary);
+    }
+
+    .btn:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.4);
+    }
+
+    section {
+      padding: 4rem 1.5rem;
+      max-width: 1200px;
+      margin: auto;
+    }
+
+    section h2 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 2rem;
+    }
+
+    /* ===== SOBRE ===== */
+    .about {
+      display: grid;
+      gap: 2rem;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      align-items: center;
+    }
+
+    .about-img {
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+
+    /* INSIRA AQUI:
+       imagem promocional, ensaio fotográfico ou frame de clipe */
+
+    /* ===== FEATURES ===== */
+    .features {
+      display: grid;
+      gap: 1.5rem;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    }
+
+    .feature-card {
+      background: rgba(255,255,255,0.03);
+      border: 1px solid rgba(255,255,255,0.08);
+      padding: 2rem;
+      border-radius: var(--radius);
+      transition: transform var(--transition), background var(--transition);
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      background: rgba(255,255,255,0.06);
+    }
+
+    .feature-card h3 {
+      margin-top: 0;
+    }
+
+    /* ===== STREAMING ===== */
+    .streaming {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
+      justify-content: center;
+    }
+
+    .streaming a {
+      padding: 0.8rem 1.2rem;
+      border-radius: var(--radius);
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(255,255,255,0.1);
+      text-decoration: none;
+      transition: background var(--transition);
+    }
+
+    .streaming a:hover {
+      background: rgba(255,255,255,0.12);
+    }
+
+    .stream-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.7rem;
+
+  padding: 0.9rem 1.4rem;
+  border-radius: var(--radius);
+
+  background: rgba(255,255,255,0.06);
+  border: 1px solid rgba(255,255,255,0.15);
+
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--text);
+
+  transition: transform var(--transition), background var(--transition);
+}
+
+.stream-btn svg {
+  width: 20px;
+  height: 20px;
+  fill: currentColor;
+}
+
+.stream-btn:hover {
+  transform: translateY(-4px);
+  background: rgba(255,255,255,0.15);
+}
+
+
+    /* ===== CTA FINAL ===== */
+    .final-cta {
+      text-align: center;
+      background: linear-gradient(90deg, var(--primary), var(--secondary));
+      border-radius: var(--radius);
+      padding: 3rem 2rem;
+    }
+
+    .final-cta h2 {
+      margin-top: 0;
+    }
+
+    footer {
+      text-align: center;
+      padding: 2rem;
+      font-size: 0.9rem;
+      color: var(--text-muted);
+    }
+  </style>
+</head>
+
+<body>
+
+  <!-- ===== HERO ===== -->
+  <header role="banner" aria-labelledby="titulo-principal">
+    <div>
+      <h1 id="titulo-principal">Novo Single Disponível</h1>
+      <p>
+        Uma experiência sonora criada para conectar, emocionar e marcar presença
+        em todas as plataformas digitais.
+      </p>
+
+      <div class="cta-group">
+        <a href="#streaming" class="btn btn-primary">Ouvir Agora</a>
+        <a href="#sobre" class="btn btn-secondary">Saiba Mais</a>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== SOBRE ===== -->
+  <section id="sobre" aria-labelledby="sobre-titulo">
+    <h2 id="sobre-titulo">Sobre o Lançamento</h2>
+
+    <div class="about">
+      <div>
+        <p>
+          Este lançamento marca uma nova fase artística, explorando sonoridades
+          modernas, identidade visual forte e uma narrativa pensada para o público
+          digital.
+        </p>
+        <p>
+          A landing page foi projetada para maximizar engajamento, retenção e
+          conversão, respeitando princípios de acessibilidade e performance.
+        </p>
+      </div>
+
+      <div class="about-img">
+        <img
+          src="..//assets/promo-lancamento.jpg"
+          alt="Imagem promocional do lançamento musical"
+        />
+      </div>
+    </div>
+  </section>
+
+  <!-- ===== FEATURES ===== -->
+  <section aria-labelledby="destaques-titulo">
+    <h2 id="destaques-titulo">Por que este lançamento é especial?</h2>
+
+    <div class="features">
+      <article class="feature-card">
+        <h3>🎵 Produção Atual</h3>
+        <p>Sonoridade alinhada às tendências do mercado digital e streaming.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>📈 Estratégia Digital</h3>
+        <p>Foco em conversão, engajamento e compartilhamento social.</p>
+      </article>
+
+      <article class="feature-card">
+        <h3>♿ Acessibilidade</h3>
+        <p>Contraste adequado, navegação por teclado e estrutura semântica.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- ===== STREAMING ===== -->
+  <<section id="streaming" aria-labelledby="streaming-titulo">
+  <h2 id="streaming-titulo">Ouça nas plataformas</h2>
+
+  <div class="streaming">
+    <a href="#" class="stream-btn spotify" aria-label="Ouvir no Spotify">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M12 0C5.372 0 0 5.372 0 12s5.372 12 12 12 12-5.372 12-12S18.628 0 12 0zm5.478 17.397a.746.746 0 01-1.027.243c-2.813-1.72-6.356-2.11-10.53-1.16a.75.75 0 01-.333-1.463c4.566-1.04 8.472-.6 11.57 1.29a.75.75 0 01.32 1.09zm1.47-3.267a.934.934 0 01-1.284.304c-3.22-1.98-8.13-2.55-11.94-1.39a.937.937 0 01-.547-1.79c4.35-1.32 9.75-.68 13.44 1.58a.94.94 0 01.33 1.3zm.13-3.4C15.45 8.53 8.73 8.33 5.23 9.4a1.12 1.12 0 11-.65-2.14c4.02-1.22 11.42-1 15.58 1.45a1.12 1.12 0 11-1.08 2.02z"/>
+      </svg>
+      Spotify
+    </a>
+
+    <a href="#" class="stream-btn youtube" aria-label="Ouvir no YouTube Music">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M23.5 6.2s-.2-1.7-.8-2.4c-.8-.9-1.7-.9-2.1-1C16.8 2.5 12 2.5 12 2.5h0s-4.8 0-8.6.3c-.4.1-1.3.1-2.1 1C.7 4.5.5 6.2.5 6.2S.2 8.1.2 10v1.9c0 1.9.3 3.8.3 3.8s.2 1.7.8 2.4c.8.9 1.9.9 2.4 1 1.7.2 7.3.3 8.3.3 0 0 4.8 0 8.6-.3.4-.1 1.3-.1 2.1-1 .6-.7.8-2.4.8-2.4s.3-1.9.3-3.8V10c0-1.9-.3-3.8-.3-3.8zM9.75 13.5v-6l5.5 3-5.5 3z"/>
+      </svg>
+      YouTube Music
+    </a>
+
+    <a href="#" class="stream-btn apple" aria-label="Ouvir no Apple Music">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M16.365 1.43c0 1.14-.52 2.28-1.39 3.11-.86.84-2.27 1.48-3.48 1.38-.16-1.09.44-2.24 1.28-3.07.86-.9 2.34-1.56 3.59-1.42zm3.1 16.73c-.46 1.06-.68 1.53-1.27 2.47-.83 1.33-2 2.98-3.45 2.99-1.28.01-1.61-.84-3.36-.83-1.74.01-2.12.84-3.4.83-1.45-.01-2.55-1.5-3.38-2.83-2.34-3.7-2.58-8.05-1.14-10.36.99-1.59 2.57-2.52 4.04-2.52 1.5 0 2.44.84 3.68.84 1.2 0 1.94-.84 3.66-.84 1.3 0 2.67.72 3.66 1.95-3.22 1.77-2.7 6.36.96 8.3z"/>
+      </svg>
+      Apple Music
+    </a>
+
+    <a href="#" class="stream-btn deezer" aria-label="Ouvir no Deezer">
+      <svg aria-hidden="true" viewBox="0 0 24 24">
+        <path d="M2 15h4v3H2v-3zm0-5h4v3H2v-3zm6 5h4v3H8v-3zm0-5h4v3H8v-3zm6 5h4v3h-4v-3zm0-5h4v3h-4v-3zm6-5h4v3h-4V5zm0 10h4v3h-4v-3z"/>
+      </svg>
+      Deezer
+    </a>
+  </div>
+</section>
+
+
+  <!-- ===== CTA FINAL ===== -->
+  <section class="final-cta" aria-labelledby="cta-final-titulo">
+    <h2 id="cta-final-titulo">Não perca este lançamento</h2>
+    <p>Disponível agora em todas as plataformas digitais.</p>
+    <a href="#streaming" class="btn btn-secondary">Ouvir Agora</a>
+  </section>
+
+  <footer role="contentinfo">
+    <p>
+      © 2026 • Luiz Sales
+    </p>
+  </footer>
+
+</body>
+</html>
